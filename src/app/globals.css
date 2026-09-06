@@ -77,6 +77,7 @@ h6 {
   font-weight: 600;
   line-height: var(--line-height-tight);
   color: hsl(var(--foreground));
+  overflow-wrap: break-word;
 }
 
 h1 {
