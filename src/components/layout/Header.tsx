@@ -5,7 +5,7 @@ import { Container } from '@/components/ui';
 import { siteConfig } from '@/lib/site-config';
 
 const navItems = [
-  { label: 'Shop', href: '#' },
+  { label: 'Shop', href: '/shop' },
   { label: 'About', href: '#' },
   { label: 'Our Standards', href: '#' },
   { label: 'Ingredients', href: '#' },
