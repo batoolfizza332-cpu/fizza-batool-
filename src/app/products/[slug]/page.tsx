@@ -127,7 +127,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Product Content */}
         <section className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)] grid grid-cols-1 md:grid-cols-2 gap-[var(--spacing-2xl)] md:gap-[var(--spacing-xl)]">
           {/* Image */}
-          <div>
+          <div className="md:sticky md:top-[var(--spacing-xl)] md:self-start">
             {product.featuredImage?.src && (
               <div className="relative w-full aspect-square overflow-hidden rounded-[var(--radius)] bg-[hsl(var(--muted-background))]">
                 <Image
