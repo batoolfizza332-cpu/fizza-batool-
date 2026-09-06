@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Header } from '@/components/layout';
 import { siteConfig } from '@/lib/site-config';
 import './globals.css';
 
@@ -34,7 +35,8 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
-        <div id="root">{children}</div>
+        <Header />
+        {children}
       </body>
     </html>
   );
