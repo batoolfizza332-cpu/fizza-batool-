@@ -17,6 +17,7 @@ export const products: Product[] = [
     },
     size: '500g',
     badge: 'featured',
+    featured: true,
     seoTitle: 'Premium Organic Blend - HARVO ORGANIC',
     seoDescription:
       'Discover our Premium Organic Blend, carefully curated for everyday wellness.',

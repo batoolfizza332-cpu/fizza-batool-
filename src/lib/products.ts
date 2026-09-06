@@ -10,7 +10,7 @@ export function getProductBySlug(slug: string): Product | undefined {
 }
 
 export function getFeaturedProducts(): Product[] {
-  return products.filter((product) => product.badge === 'featured');
+  return products.filter((product) => product.featured === true);
 }
 
 export function getProductsByCategory(category: string): Product[] {

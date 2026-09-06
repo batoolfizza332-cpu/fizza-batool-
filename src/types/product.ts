@@ -15,6 +15,8 @@ export interface Product {
   }[];
   size?: string;
   badge?: 'featured' | 'bestSeller' | 'new';
+  featured?: boolean;
+  sku?: string;
   seoTitle?: string;
   seoDescription?: string;
   keywords?: string[];
