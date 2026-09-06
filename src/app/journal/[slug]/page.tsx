@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/ui';
 import { ProductCard } from '@/components/product';
 import { IngredientCard } from '@/components/ingredient';
-import { BreadcrumbJsonLd } from '@/components/seo';
+import { BreadcrumbJsonLd, JsonLd } from '@/components/seo';
 import { getArticleBySlug, getAllArticles } from '@/lib/articles';
 import { getProductBySlug } from '@/lib/products';
 import { getIngredientBySlug } from '@/lib/ingredients';
@@ -74,9 +74,50 @@ export default async function ArticlePage({ params }: Props) {
     { name: article.title },
   ];
 
+  // Build Article schema
+  const articleSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteConfig.siteUrl}/journal/${article.slug}`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.siteName,
+      url: siteConfig.siteUrl,
+    },
+  };
+
+  // Add image if available
+  if (article.featuredImage?.src) {
+    articleSchema.image = article.featuredImage.src;
+  }
+
+  // Add datePublished if available
+  if (article.publishedAt) {
+    articleSchema.datePublished = article.publishedAt;
+  }
+
+  // Add dateModified if available
+  if (article.updatedAt) {
+    articleSchema.dateModified = article.updatedAt;
+  }
+
+  // Add author if available
+  if (article.author) {
+    articleSchema.author = {
+      '@type': 'Person',
+      name: article.author,
+    };
+  }
+
   return (
     <main>
       <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
+      <JsonLd data={articleSchema} />
       <Container>
         {/* Breadcrumbs */}
         <nav
