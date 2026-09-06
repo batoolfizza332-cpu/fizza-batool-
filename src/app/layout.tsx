@@ -1,8 +1,23 @@
 import type { Metadata } from 'next';
+import { Inter, Crimson_Text } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
 import { JsonLd } from '@/components/seo';
 import { siteConfig } from '@/lib/site-config';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const crimsonText = Crimson_Text({
+  subsets: ['latin'],
+  weight: ['600'],
+  variable: '--font-crimson',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: siteConfig.siteName,
@@ -48,7 +63,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang={siteConfig.locale}>
+    <html lang={siteConfig.locale} className={`${inter.variable} ${crimsonText.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <JsonLd data={organizationSchema} />
