@@ -177,7 +177,7 @@ export default async function ProductPage({ params }: Props) {
 
             {/* CTA */}
             <div className="mb-[var(--spacing-xl)]">
-              <Button variant="primary">Shop This Product</Button>
+              <Button href="/shop" variant="primary">Explore All Products</Button>
             </div>
 
             {/* Divider */}
