@@ -4,15 +4,20 @@ import { ProductGrid } from '@/components/product';
 import { getAllProducts } from '@/lib/products';
 import { siteConfig } from '@/lib/site-config';
 
+const title = `Shop | ${siteConfig.siteName}`;
+const description = 'Explore products from HARVO ORGANIC.';
+const canonicalPath = '/shop';
+
 export const metadata: Metadata = {
-  title: `Shop | ${siteConfig.siteName}`,
-  description: 'Explore products from HARVO ORGANIC.',
+  title,
+  description,
   alternates: {
-    canonical: '/shop',
+    canonical: canonicalPath,
   },
   openGraph: {
-    title: `Shop | ${siteConfig.siteName}`,
-    description: 'Explore products from HARVO ORGANIC.',
+    title,
+    description,
+    url: canonicalPath,
   },
 };
 

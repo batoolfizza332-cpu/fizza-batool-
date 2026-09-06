@@ -28,18 +28,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const title = article.seoTitle || `${article.title} | ${siteConfig.siteName}`;
+  const description = article.seoDescription || article.excerpt;
+  const canonicalPath = `/journal/${article.slug}`;
+
   return {
-    title: article.seoTitle || `${article.title} | HARVO ORGANIC`,
-    description: article.seoDescription || article.excerpt,
+    title,
+    description,
     alternates: {
-      canonical: `/journal/${article.slug}`,
+      canonical: canonicalPath,
     },
     openGraph: {
       type: 'article',
       siteName: siteConfig.siteName,
-      url: `/journal/${article.slug}`,
-      title: article.seoTitle || `${article.title} | HARVO ORGANIC`,
-      description: article.seoDescription || article.excerpt,
+      url: canonicalPath,
+      title,
+      description,
       images: article.featuredImage ? [article.featuredImage.src] : [],
     },
     ...(article.featuredImage?.src && {

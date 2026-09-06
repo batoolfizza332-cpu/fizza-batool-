@@ -24,18 +24,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const title = product.seoTitle || product.name;
+  const description = product.seoDescription || product.shortDescription;
+  const canonicalPath = `/products/${product.slug}`;
+
   return {
-    title: product.seoTitle || product.name,
-    description: product.seoDescription || product.shortDescription,
+    title,
+    description,
     alternates: {
-      canonical: `/products/${product.slug}`,
+      canonical: canonicalPath,
     },
     openGraph: {
       type: 'website',
       siteName: siteConfig.siteName,
-      url: `/products/${product.slug}`,
-      title: product.seoTitle || product.name,
-      description: product.seoDescription || product.shortDescription,
+      url: canonicalPath,
+      title,
+      description,
       images: product.featuredImage ? [product.featuredImage.src] : [],
     },
     ...(product.featuredImage?.src && {

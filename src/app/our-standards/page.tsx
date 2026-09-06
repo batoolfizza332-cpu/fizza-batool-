@@ -1,12 +1,21 @@
 import Link from 'next/link';
 import { Container, Button } from '@/components/ui';
 
+const title = 'Our Standards | HARVO ORGANIC';
+const description =
+  'Learn about the principles HARVO ORGANIC uses when presenting and selecting products.';
+const canonicalPath = '/our-standards';
+
 export const metadata = {
-  title: 'Our Standards | HARVO ORGANIC',
-  description:
-    'Learn about the principles HARVO ORGANIC uses when presenting and selecting products.',
+  title,
+  description,
   alternates: {
-    canonical: '/our-standards',
+    canonical: canonicalPath,
+  },
+  openGraph: {
+    title,
+    description,
+    url: canonicalPath,
   },
 };
 

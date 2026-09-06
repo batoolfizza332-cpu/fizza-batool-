@@ -1,12 +1,21 @@
 import Link from 'next/link';
 import { Container, Button } from '@/components/ui';
 
+const title = 'About HARVO ORGANIC';
+const description =
+  'Learn more about HARVO ORGANIC and our approach to thoughtfully selected organic products.';
+const canonicalPath = '/about';
+
 export const metadata = {
-  title: 'About HARVO ORGANIC',
-  description:
-    'Learn more about HARVO ORGANIC and our approach to thoughtfully selected organic products.',
+  title,
+  description,
   alternates: {
-    canonical: '/about',
+    canonical: canonicalPath,
+  },
+  openGraph: {
+    title,
+    description,
+    url: canonicalPath,
   },
 };
 

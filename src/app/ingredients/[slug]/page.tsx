@@ -26,20 +26,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const title =
+    ingredient.seoTitle || `${ingredient.name} | ${siteConfig.siteName}`;
+  const description =
+    ingredient.seoDescription || ingredient.shortDescription;
+  const canonicalPath = `/ingredients/${ingredient.slug}`;
+
   return {
-    title: ingredient.seoTitle || `${ingredient.name} | HARVO ORGANIC`,
-    description:
-      ingredient.seoDescription || ingredient.shortDescription,
+    title,
+    description,
     alternates: {
-      canonical: `/ingredients/${ingredient.slug}`,
+      canonical: canonicalPath,
     },
     openGraph: {
       type: 'website',
       siteName: siteConfig.siteName,
-      url: `/ingredients/${ingredient.slug}`,
-      title: ingredient.seoTitle || `${ingredient.name} | HARVO ORGANIC`,
-      description:
-        ingredient.seoDescription || ingredient.shortDescription,
+      url: canonicalPath,
+      title,
+      description,
       images: ingredient.image ? [ingredient.image.src] : [],
     },
     ...(ingredient.image?.src && {

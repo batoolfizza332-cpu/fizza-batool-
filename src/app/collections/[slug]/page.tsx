@@ -27,17 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title =
     category.seoTitle || `${category.name} | ${siteConfig.siteName}`;
   const description = category.seoDescription || category.shortDescription;
+  const canonicalPath = `/collections/${category.slug}`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: `/collections/${category.slug}`,
+      canonical: canonicalPath,
     },
     openGraph: {
       type: 'website',
       siteName: siteConfig.siteName,
-      url: `/collections/${category.slug}`,
+      url: canonicalPath,
       title,
       description,
       images: category.image ? [category.image.src] : [],

@@ -3,12 +3,21 @@ import { Container, Button } from '@/components/ui';
 import { IngredientGrid } from '@/components/ingredient';
 import { getAllIngredients } from '@/lib/ingredients';
 
+const title = 'Ingredients | HARVO ORGANIC';
+const description =
+  'Explore ingredient information and product transparency from HARVO ORGANIC.';
+const canonicalPath = '/ingredients';
+
 export const metadata = {
-  title: 'Ingredients | HARVO ORGANIC',
-  description:
-    'Explore ingredient information and product transparency from HARVO ORGANIC.',
+  title,
+  description,
   alternates: {
-    canonical: '/ingredients',
+    canonical: canonicalPath,
+  },
+  openGraph: {
+    title,
+    description,
+    url: canonicalPath,
   },
 };
 

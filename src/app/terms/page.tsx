@@ -1,10 +1,19 @@
 import { Container } from '@/components/ui';
 
+const title = 'Terms & Conditions | HARVO ORGANIC';
+const description = 'Terms and conditions information for HARVO ORGANIC.';
+const canonicalPath = '/terms';
+
 export const metadata = {
-  title: 'Terms & Conditions | HARVO ORGANIC',
-  description: 'Terms and conditions information for HARVO ORGANIC.',
+  title,
+  description,
   alternates: {
-    canonical: '/terms',
+    canonical: canonicalPath,
+  },
+  openGraph: {
+    title,
+    description,
+    url: canonicalPath,
   },
 };
 

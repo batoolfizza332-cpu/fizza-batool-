@@ -2,12 +2,21 @@ import { Container } from '@/components/ui';
 import { ArticleGrid } from '@/components/article';
 import { getAllArticles } from '@/lib/articles';
 
+const title = 'Journal | HARVO ORGANIC';
+const description =
+  'Explore articles, product guidance and ingredient information from HARVO ORGANIC.';
+const canonicalPath = '/journal';
+
 export const metadata = {
-  title: 'Journal | HARVO ORGANIC',
-  description:
-    'Explore articles, product guidance and ingredient information from HARVO ORGANIC.',
+  title,
+  description,
   alternates: {
-    canonical: '/journal',
+    canonical: canonicalPath,
+  },
+  openGraph: {
+    title,
+    description,
+    url: canonicalPath,
   },
 };
 
