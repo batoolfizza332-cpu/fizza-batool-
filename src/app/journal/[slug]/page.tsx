@@ -35,10 +35,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/journal/${article.slug}`,
     },
     openGraph: {
+      type: 'article',
+      siteName: siteConfig.siteName,
+      url: `/journal/${article.slug}`,
       title: article.seoTitle || `${article.title} | HARVO ORGANIC`,
       description: article.seoDescription || article.excerpt,
       images: article.featuredImage ? [article.featuredImage.src] : [],
     },
+    ...(article.featuredImage?.src && {
+      twitter: { card: 'summary_large_image' as const },
+    }),
   };
 }
 

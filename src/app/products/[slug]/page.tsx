@@ -31,10 +31,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/products/${product.slug}`,
     },
     openGraph: {
+      type: 'website',
+      siteName: siteConfig.siteName,
+      url: `/products/${product.slug}`,
       title: product.seoTitle || product.name,
       description: product.seoDescription || product.shortDescription,
       images: product.featuredImage ? [product.featuredImage.src] : [],
     },
+    ...(product.featuredImage?.src && {
+      twitter: { card: 'summary_large_image' as const },
+    }),
   };
 }
 

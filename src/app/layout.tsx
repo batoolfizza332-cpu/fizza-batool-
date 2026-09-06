@@ -17,7 +17,9 @@ export const metadata: Metadata = {
     description: siteConfig.siteDescription,
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
+    title: siteConfig.siteName,
+    description: siteConfig.siteDescription,
   },
   robots: {
     index: true,
