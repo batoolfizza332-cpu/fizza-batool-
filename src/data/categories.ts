@@ -25,4 +25,12 @@ export const categories: Category[] = [
     seoDescription: 'Explore our wellness-focused organic product collection.',
     featured: true,
   },
+  {
+    id: 'harvo-dehydrated-foods',
+    slug: 'dehydrated-foods',
+    name: 'Dehydrated Foods',
+    shortDescription: 'Dehydrated food products from HARVO ORGANIC.',
+    description: 'A collection of dehydrated HARVO ORGANIC products.',
+    featured: true,
+  },
 ];
