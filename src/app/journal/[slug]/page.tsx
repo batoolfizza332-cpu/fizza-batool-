@@ -210,7 +210,7 @@ export default async function ArticlePage({ params }: Props) {
         )}
 
         {/* Article Content */}
-        <section className="prose max-w-3xl mb-[var(--section-spacing)]">
+        <section className="max-w-2xl">
           <div className="text-[hsl(var(--muted-foreground))] leading-relaxed whitespace-pre-wrap">
             {article.content}
           </div>
