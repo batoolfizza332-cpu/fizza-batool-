@@ -1,6 +1,8 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Container } from '@/components/ui';
+import { Container, Button } from '@/components/ui';
 import { getProductBySlug, getAllProducts } from '@/lib/products';
 
 interface Props {
@@ -49,11 +51,136 @@ export default async function ProductPage({ params }: Props) {
   return (
     <main>
       <Container>
-        <section className="py-[var(--spacing-2xl)]">
-          <h1>{product.name}</h1>
-          <p className="text-lg text-[hsl(var(--muted-foreground))] mt-[var(--spacing-md)]">
-            {product.description}
-          </p>
+        {/* Breadcrumbs */}
+        <nav
+          className="py-[var(--spacing-md)] flex items-center gap-[var(--spacing-sm)] text-sm"
+          aria-label="Breadcrumb"
+        >
+          <Link
+            href="/"
+            className="text-[hsl(var(--primary))] hover:text-[hsl(var(--primary-hover))]"
+          >
+            Home
+          </Link>
+          <span className="text-[hsl(var(--muted-foreground))]">/</span>
+          <Link
+            href="/shop"
+            className="text-[hsl(var(--primary))] hover:text-[hsl(var(--primary-hover))]"
+          >
+            Shop
+          </Link>
+          <span className="text-[hsl(var(--muted-foreground))]">/</span>
+          <span className="text-[hsl(var(--foreground))]">{product.name}</span>
+        </nav>
+
+        {/* Product Content */}
+        <section className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)] grid grid-cols-1 md:grid-cols-2 gap-[var(--spacing-2xl)] md:gap-[var(--spacing-xl)]">
+          {/* Image */}
+          <div>
+            {product.featuredImage?.src && (
+              <div className="relative w-full aspect-square overflow-hidden rounded-[var(--radius)] bg-[hsl(var(--muted-background))]">
+                <Image
+                  src={product.featuredImage.src}
+                  alt={product.featuredImage.alt || product.name}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1240px) 50vw, 620px"
+                  className="object-cover"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Details */}
+          <div className="flex flex-col justify-start">
+            {/* Category & Badge */}
+            <div className="flex items-center gap-[var(--spacing-md)] mb-[var(--spacing-md)]">
+              {product.category && (
+                <span className="eyebrow">{product.category}</span>
+              )}
+              {product.badge && (
+                <span className="px-[var(--spacing-sm)] py-[calc(var(--spacing-xs)/2)] bg-[hsl(var(--primary))] text-white text-xs font-semibold rounded-[var(--radius)]">
+                  {product.badge === 'featured'
+                    ? 'Featured'
+                    : product.badge === 'bestSeller'
+                      ? 'Best Seller'
+                      : 'New'}
+                </span>
+              )}
+            </div>
+
+            {/* Name */}
+            <h1 className="mb-[var(--spacing-md)]">{product.name}</h1>
+
+            {/* Size */}
+            {product.size && (
+              <p className="text-sm text-[hsl(var(--muted-foreground))] mb-[var(--spacing-md)]">
+                Size: {product.size}
+              </p>
+            )}
+
+            {/* Short Description */}
+            <p className="text-lg text-[hsl(var(--muted-foreground))] mb-[var(--spacing-lg)]">
+              {product.shortDescription}
+            </p>
+
+            {/* CTA */}
+            <div className="mb-[var(--spacing-xl)]">
+              <Button variant="primary">Shop This Product</Button>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-[hsl(var(--border))] py-[var(--spacing-lg)]" />
+
+            {/* Full Description */}
+            {product.description && (
+              <div className="mb-[var(--spacing-lg)]">
+                <p className="text-[hsl(var(--muted-foreground))] leading-relaxed">
+                  {product.description}
+                </p>
+              </div>
+            )}
+
+            {/* Benefits */}
+            {product.benefits && product.benefits.length > 0 && (
+              <div className="mb-[var(--spacing-lg)]">
+                <h3 className="mb-[var(--spacing-md)]">Benefits</h3>
+                <ul className="space-y-[var(--spacing-sm)]">
+                  {product.benefits.map((benefit, index) => (
+                    <li
+                      key={index}
+                      className="text-[hsl(var(--muted-foreground))] flex items-start gap-[var(--spacing-sm)]"
+                    >
+                      <span className="text-[hsl(var(--primary))] font-bold mt-0.5">
+                        •
+                      </span>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Ingredients */}
+            {product.ingredients && product.ingredients.length > 0 && (
+              <div className="mb-[var(--spacing-lg)]">
+                <h3 className="mb-[var(--spacing-md)]">Ingredients</h3>
+                <p className="text-[hsl(var(--muted-foreground))]">
+                  {product.ingredients.join(', ')}
+                </p>
+              </div>
+            )}
+
+            {/* Usage */}
+            {product.usage && (
+              <div>
+                <h3 className="mb-[var(--spacing-md)]">How to Use</h3>
+                <p className="text-[hsl(var(--muted-foreground))]">
+                  {product.usage}
+                </p>
+              </div>
+            )}
+          </div>
         </section>
       </Container>
     </main>
