@@ -7,6 +7,9 @@ export const metadata = {
   title: 'Ingredients | HARVO ORGANIC',
   description:
     'Explore ingredient information and product transparency from HARVO ORGANIC.',
+  alternates: {
+    canonical: '/ingredients',
+  },
 };
 
 export default function Ingredients() {

@@ -6,6 +6,9 @@ export const metadata = {
   title: 'Journal | HARVO ORGANIC',
   description:
     'Explore articles, product guidance and ingredient information from HARVO ORGANIC.',
+  alternates: {
+    canonical: '/journal',
+  },
 };
 
 export default function Journal() {

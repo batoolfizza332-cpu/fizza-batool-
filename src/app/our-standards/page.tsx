@@ -5,6 +5,9 @@ export const metadata = {
   title: 'Our Standards | HARVO ORGANIC',
   description:
     'Learn about the principles HARVO ORGANIC uses when presenting and selecting products.',
+  alternates: {
+    canonical: '/our-standards',
+  },
 };
 
 export default function OurStandards() {

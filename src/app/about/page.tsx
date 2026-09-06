@@ -5,6 +5,9 @@ export const metadata = {
   title: 'About HARVO ORGANIC',
   description:
     'Learn more about HARVO ORGANIC and our approach to thoughtfully selected organic products.',
+  alternates: {
+    canonical: '/about',
+  },
 };
 
 export default function About() {

@@ -3,6 +3,9 @@ import { Container } from '@/components/ui';
 export const metadata = {
   title: 'Privacy Policy | HARVO ORGANIC',
   description: 'Privacy information for HARVO ORGANIC.',
+  alternates: {
+    canonical: '/privacy',
+  },
 };
 
 export default function Privacy() {

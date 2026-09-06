@@ -3,6 +3,9 @@ import { Container } from '@/components/ui';
 export const metadata = {
   title: 'Terms & Conditions | HARVO ORGANIC',
   description: 'Terms and conditions information for HARVO ORGANIC.',
+  alternates: {
+    canonical: '/terms',
+  },
 };
 
 export default function Terms() {

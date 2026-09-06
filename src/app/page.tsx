@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Hero, BrandStory } from '@/components/home';
 import { Container, Button } from '@/components/ui';
 import { ProductGrid } from '@/components/product';
 import { getFeaturedProducts } from '@/lib/products';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default function Home() {
   const featuredProducts = getFeaturedProducts();

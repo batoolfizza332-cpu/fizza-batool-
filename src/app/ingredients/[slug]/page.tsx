@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: ingredient.seoTitle || `${ingredient.name} | HARVO ORGANIC`,
     description:
       ingredient.seoDescription || ingredient.shortDescription,
+    alternates: {
+      canonical: `/ingredients/${ingredient.slug}`,
+    },
     openGraph: {
       title: ingredient.seoTitle || `${ingredient.name} | HARVO ORGANIC`,
       description:

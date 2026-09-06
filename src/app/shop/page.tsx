@@ -7,6 +7,9 @@ import { siteConfig } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: `Shop | ${siteConfig.siteName}`,
   description: 'Explore products from HARVO ORGANIC.',
+  alternates: {
+    canonical: '/shop',
+  },
   openGraph: {
     title: `Shop | ${siteConfig.siteName}`,
     description: 'Explore products from HARVO ORGANIC.',
