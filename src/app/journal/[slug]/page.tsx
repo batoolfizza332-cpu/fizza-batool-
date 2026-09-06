@@ -5,9 +5,11 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/ui';
 import { ProductCard } from '@/components/product';
 import { IngredientCard } from '@/components/ingredient';
+import { BreadcrumbJsonLd } from '@/components/seo';
 import { getArticleBySlug, getAllArticles } from '@/lib/articles';
 import { getProductBySlug } from '@/lib/products';
 import { getIngredientBySlug } from '@/lib/ingredients';
+import { siteConfig } from '@/lib/site-config';
 
 interface Props {
   params: Promise<{
@@ -66,8 +68,15 @@ export default async function ArticlePage({ params }: Props) {
         .filter((ingredient) => ingredient !== undefined)
     : [];
 
+  const breadcrumbItems = [
+    { name: 'Home', url: '/' },
+    { name: 'Journal', url: '/journal' },
+    { name: article.title },
+  ];
+
   return (
     <main>
+      <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
       <Container>
         {/* Breadcrumbs */}
         <nav

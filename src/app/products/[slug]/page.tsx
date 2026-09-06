@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Container, Button } from '@/components/ui';
-import { JsonLd } from '@/components/seo';
+import { JsonLd, BreadcrumbJsonLd } from '@/components/seo';
 import { getProductBySlug, getAllProducts } from '@/lib/products';
 import { siteConfig } from '@/lib/site-config';
 
@@ -78,8 +78,15 @@ export default async function ProductPage({ params }: Props) {
     productSchema.identifier = product.id;
   }
 
+  const breadcrumbItems = [
+    { name: 'Home', url: '/' },
+    { name: 'Shop', url: '/shop' },
+    { name: product.name },
+  ];
+
   return (
     <main>
+      <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
       <JsonLd data={productSchema} />
       <Container>
         {/* Breadcrumbs */}

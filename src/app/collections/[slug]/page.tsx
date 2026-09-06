@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui';
 import { ProductGrid } from '@/components/product';
+import { BreadcrumbJsonLd } from '@/components/seo';
 import { getCategoryBySlug, getAllCategories } from '@/lib/categories';
 import { getProductsByCategory } from '@/lib/products';
 import { siteConfig } from '@/lib/site-config';
@@ -55,8 +56,15 @@ export default async function CollectionPage({ params }: Props) {
 
   const products = getProductsByCategory(category.name);
 
+  const breadcrumbItems = [
+    { name: 'Home', url: '/' },
+    { name: 'Shop', url: '/shop' },
+    { name: category.name },
+  ];
+
   return (
     <main>
+      <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
       <Container>
         {/* Collection Header */}
         <section className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)]">

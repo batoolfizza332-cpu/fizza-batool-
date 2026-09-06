@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Container } from '@/components/ui';
 import { ProductCard } from '@/components/product';
+import { BreadcrumbJsonLd } from '@/components/seo';
 import { getIngredientBySlug, getAllIngredients } from '@/lib/ingredients';
 import { getProductBySlug } from '@/lib/products';
+import { siteConfig } from '@/lib/site-config';
 
 interface Props {
   params: Promise<{
@@ -59,8 +61,15 @@ export default async function IngredientPage({ params }: Props) {
         .filter((product) => product !== undefined)
     : [];
 
+  const breadcrumbItems = [
+    { name: 'Home', url: '/' },
+    { name: 'Ingredients', url: '/ingredients' },
+    { name: ingredient.name },
+  ];
+
   return (
     <main>
+      <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
       <Container>
         {/* Breadcrumbs */}
         <nav
