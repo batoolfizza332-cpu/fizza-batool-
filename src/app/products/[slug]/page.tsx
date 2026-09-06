@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { Container } from '@/components/ui';
 import { getProductBySlug, getAllProducts } from '@/lib/products';
 
 interface Props {
@@ -46,13 +47,15 @@ export default async function ProductPage({ params }: Props) {
   }
 
   return (
-    <main className="container mx-auto px-4 py-16">
-      <section>
-        <h1>{product.name}</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          {product.description}
-        </p>
-      </section>
+    <main>
+      <Container>
+        <section className="py-[var(--spacing-2xl)]">
+          <h1>{product.name}</h1>
+          <p className="text-lg text-[hsl(var(--muted-foreground))] mt-[var(--spacing-md)]">
+            {product.description}
+          </p>
+        </section>
+      </Container>
     </main>
   );
 }
