@@ -20,6 +20,7 @@ export interface Product {
   keywords?: string[];
   benefits?: string[];
   ingredients?: string[];
+  ingredientSlugs?: string[];
   usage?: string;
   relatedProductSlugs?: string[];
 }
