@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Container, Button } from '@/components/ui';
+import { JsonLd } from '@/components/seo';
 import { getProductBySlug, getAllProducts } from '@/lib/products';
+import { siteConfig } from '@/lib/site-config';
 
 interface Props {
   params: Promise<{
@@ -48,8 +50,37 @@ export default async function ProductPage({ params }: Props) {
     notFound();
   }
 
+  // Build Product schema
+  const productSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description || product.shortDescription,
+    brand: {
+      '@type': 'Brand',
+      name: siteConfig.siteName,
+    },
+    url: `${siteConfig.siteUrl}/products/${product.slug}`,
+  };
+
+  // Add image if available
+  if (product.featuredImage?.src) {
+    productSchema.image = product.featuredImage.src;
+  }
+
+  // Add category if available
+  if (product.category) {
+    productSchema.category = product.category;
+  }
+
+  // Add ID for identification (not SKU or GTIN)
+  if (product.id) {
+    productSchema.identifier = product.id;
+  }
+
   return (
     <main>
+      <JsonLd data={productSchema} />
       <Container>
         {/* Breadcrumbs */}
         <nav
