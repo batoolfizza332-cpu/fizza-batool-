@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui';
 import { ProductGrid } from '@/components/product';
-import { BreadcrumbJsonLd } from '@/components/seo';
+import { BreadcrumbJsonLd, JsonLd } from '@/components/seo';
 import { getCategoryBySlug, getAllCategories } from '@/lib/categories';
 import { getProductsByCategory } from '@/lib/products';
 import { siteConfig } from '@/lib/site-config';
@@ -62,9 +62,33 @@ export default async function CollectionPage({ params }: Props) {
     { name: category.name },
   ];
 
+  // Build CollectionPage schema
+  const collectionPageSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: category.name,
+    description: category.description || category.shortDescription,
+    url: `${siteConfig.siteUrl}/collections/${category.slug}`,
+  };
+
+  // Add ItemList if products exist
+  if (products.length > 0) {
+    collectionPageSchema.mainEntity = {
+      '@type': 'ItemList',
+      itemListElement: products.map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: product.name,
+        url: `${siteConfig.siteUrl}/products/${product.slug}`,
+        ...(product.featuredImage?.src && { image: product.featuredImage.src }),
+      })),
+    };
+  }
+
   return (
     <main>
       <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
+      <JsonLd data={collectionPageSchema} />
       <Container>
         {/* Collection Header */}
         <section className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)]">
