@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { Container, Button } from '@/components/ui';
+import { IngredientGrid } from '@/components/ingredient';
+import { getAllIngredients } from '@/lib/ingredients';
 
 export const metadata = {
   title: 'Ingredients | HARVO ORGANIC',
@@ -8,6 +10,8 @@ export const metadata = {
 };
 
 export default function Ingredients() {
+  const ingredients = getAllIngredients();
+
   return (
     <main>
       <Container className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)]">
@@ -82,8 +86,19 @@ export default function Ingredients() {
           </section>
         </div>
 
+        {/* Ingredients Section */}
+        {ingredients.length > 0 && (
+          <section className="border-t border-[hsl(var(--border))] pt-[var(--section-spacing)]">
+            <h2 className="mb-[var(--spacing-lg)]">Explore Ingredients</h2>
+            <p className="text-lg text-[hsl(var(--muted-foreground))] mb-[var(--spacing-lg)] max-w-3xl leading-relaxed">
+              Learn more about the key ingredients we feature in our products.
+            </p>
+            <IngredientGrid ingredients={ingredients} />
+          </section>
+        )}
+
         {/* CTA */}
-        <div>
+        <div className="mt-[var(--section-spacing)]">
           <Link href="/shop">
             <Button variant="primary">Explore Products</Button>
           </Link>
