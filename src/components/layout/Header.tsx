@@ -6,10 +6,10 @@ import { siteConfig } from '@/lib/site-config';
 
 const navItems = [
   { label: 'Shop', href: '/shop' },
-  { label: 'About', href: '#' },
-  { label: 'Our Standards', href: '#' },
-  { label: 'Ingredients', href: '#' },
-  { label: 'Journal', href: '#' },
+  { label: 'About', href: '/about' },
+  { label: 'Our Standards', href: '/our-standards' },
+  { label: 'Ingredients', href: '/ingredients' },
+  { label: 'Journal', href: '/journal' },
 ];
 
 export function Header() {
