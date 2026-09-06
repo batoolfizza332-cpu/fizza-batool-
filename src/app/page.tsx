@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Hero } from '@/components/home';
+import { Hero, BrandStory } from '@/components/home';
 import { Container, Button } from '@/components/ui';
 import { ProductGrid } from '@/components/product';
 import { getFeaturedProducts } from '@/lib/products';
@@ -44,6 +44,11 @@ export default function Home() {
           </Container>
         </section>
       )}
+
+      {/* Brand Story Section */}
+      <Container>
+        <BrandStory />
+      </Container>
     </main>
   );
 }
