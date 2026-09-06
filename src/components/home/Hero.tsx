@@ -40,8 +40,8 @@ export function Hero({ image }: HeroProps = {}) {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-[var(--spacing-md)] md:flex-col md:w-fit">
-              <Button variant="primary">Shop Products</Button>
-              <Button variant="secondary">Our Story</Button>
+              <Button href="/shop" variant="primary">Shop Products</Button>
+              <Button href="/about" variant="secondary">Our Story</Button>
             </div>
           </div>
 

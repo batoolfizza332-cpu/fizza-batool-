@@ -65,14 +65,14 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
 
-      {/* View Product Link */}
+      {/* View Product Label (decorative; card is already a single link above) */}
       <div className="mt-[var(--spacing-md)] pt-[var(--spacing-md)] border-t border-[hsl(var(--border))]">
-        <Link
-          href={`/products/${product.slug}`}
-          className="inline-block text-sm font-medium text-[hsl(var(--primary))] hover:text-[hsl(var(--primary-hover))] transition-colors"
+        <span
+          aria-hidden="true"
+          className="inline-block text-sm font-medium text-[hsl(var(--primary))] group-hover:text-[hsl(var(--primary-hover))] transition-colors"
         >
           View Product →
-        </Link>
+        </span>
       </div>
     </article>
   );

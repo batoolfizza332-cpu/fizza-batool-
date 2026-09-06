@@ -40,14 +40,14 @@ export function CategoryCard({ category }: CategoryCardProps) {
         </div>
       </Link>
 
-      {/* View Link */}
+      {/* View Label (decorative; card is already a single link above) */}
       <div className="mt-[var(--spacing-md)] pt-[var(--spacing-md)] border-t border-[hsl(var(--border))]">
-        <Link
-          href={`/collections/${category.slug}`}
-          className="inline-block text-sm font-medium text-[hsl(var(--primary))] hover:text-[hsl(var(--primary-hover))] transition-colors"
+        <span
+          aria-hidden="true"
+          className="inline-block text-sm font-medium text-[hsl(var(--primary))] group-hover:text-[hsl(var(--primary-hover))] transition-colors"
         >
           Explore Collection →
-        </Link>
+        </span>
       </div>
     </article>
   );

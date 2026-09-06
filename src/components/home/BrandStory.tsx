@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Button } from '@/components/ui';
 
 export function BrandStory() {
@@ -31,9 +30,7 @@ export function BrandStory() {
 
           {/* CTA */}
           <div>
-            <Link href="/about">
-              <Button variant="primary">Learn About HARVO</Button>
-            </Link>
+            <Button href="/about" variant="primary">Learn About HARVO</Button>
           </div>
         </div>
 

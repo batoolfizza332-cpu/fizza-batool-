@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Container, Button } from '@/components/ui';
 import { IngredientGrid } from '@/components/ingredient';
 import { getAllIngredients } from '@/lib/ingredients';
@@ -111,9 +110,7 @@ export default function Ingredients() {
 
         {/* CTA */}
         <div className="mt-[var(--section-spacing)]">
-          <Link href="/shop">
-            <Button variant="primary">Explore Products</Button>
-          </Link>
+          <Button href="/shop" variant="primary">Explore Products</Button>
         </div>
       </Container>
     </main>

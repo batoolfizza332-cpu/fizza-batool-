@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Container, Button } from '@/components/ui';
 
 export default function NotFound() {
@@ -19,12 +18,8 @@ export default function NotFound() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-[var(--spacing-md)] justify-center">
-            <Link href="/">
-              <Button variant="primary">Return Home</Button>
-            </Link>
-            <Link href="/shop">
-              <Button variant="secondary">Shop Products</Button>
-            </Link>
+            <Button href="/" variant="primary">Return Home</Button>
+            <Button href="/shop" variant="secondary">Shop Products</Button>
           </div>
         </div>
       </Container>

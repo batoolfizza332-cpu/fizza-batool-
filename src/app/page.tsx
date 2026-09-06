@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Hero, BrandStory } from '@/components/home';
 import { Container, Button } from '@/components/ui';
 import { ProductGrid } from '@/components/product';
@@ -44,9 +43,7 @@ export default function Home() {
 
             {/* View All Link */}
             <div className="mt-[var(--spacing-2xl)] text-center">
-              <Link href="/shop">
-                <Button variant="secondary">View All Products</Button>
-              </Link>
+              <Button href="/shop" variant="secondary">View All Products</Button>
             </div>
           </Container>
         </section>

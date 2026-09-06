@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Container, Button } from '@/components/ui';
 
 const title = 'About HARVO ORGANIC';
@@ -84,9 +83,7 @@ export default function About() {
 
         {/* CTA */}
         <div>
-          <Link href="/shop">
-            <Button variant="primary">Explore Products</Button>
-          </Link>
+          <Button href="/shop" variant="primary">Explore Products</Button>
         </div>
       </Container>
     </main>

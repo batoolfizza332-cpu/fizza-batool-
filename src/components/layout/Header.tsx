@@ -1,7 +1,6 @@
-'use client';
-
 import Link from 'next/link';
 import { Container } from '@/components/ui';
+import { MobileNav } from './MobileNav';
 import { siteConfig } from '@/lib/site-config';
 
 const navItems = [
@@ -14,7 +13,7 @@ const navItems = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-[hsl(var(--border))] bg-[hsl(var(--background))]">
+    <header className="sticky top-0 z-40 border-b border-[hsl(var(--border))] bg-[hsl(var(--background))] relative">
       <Container className="flex items-center justify-between py-[var(--spacing-md)]">
         {/* Brand */}
         <div>
@@ -45,42 +44,8 @@ export function Header() {
           </ul>
         </nav>
 
-        {/* Mobile Menu Button Placeholder */}
-        <button
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-[var(--radius)] text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted-background))]"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line
-              x1="4"
-              y1="6"
-              x2="20"
-              y2="6"
-            />
-            <line
-              x1="4"
-              y1="12"
-              x2="20"
-              y2="12"
-            />
-            <line
-              x1="4"
-              y1="18"
-              x2="20"
-              y2="18"
-            />
-          </svg>
-        </button>
+        {/* Mobile Navigation */}
+        <MobileNav items={navItems} />
       </Container>
     </header>
   );
