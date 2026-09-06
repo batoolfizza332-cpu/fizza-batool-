@@ -80,6 +80,35 @@ export default async function IngredientPage({ params }: Props) {
     { name: ingredient.name },
   ];
 
+  const hasImage = Boolean(ingredient.image?.src);
+
+  const details = (
+    <div
+      className={
+        hasImage
+          ? 'flex flex-col justify-start'
+          : 'flex flex-col justify-start max-w-2xl'
+      }
+    >
+      {/* Name */}
+      <h1 className="mb-[var(--spacing-md)]">{ingredient.name}</h1>
+
+      {/* Short Description */}
+      <p className="text-lg text-[hsl(var(--muted-foreground))] mb-[var(--spacing-lg)]">
+        {ingredient.shortDescription}
+      </p>
+
+      {/* Full Description */}
+      {ingredient.description && (
+        <div className="mb-[var(--spacing-lg)]">
+          <p className="text-[hsl(var(--muted-foreground))] leading-relaxed">
+            {ingredient.description}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <main>
       <BreadcrumbJsonLd items={breadcrumbItems} siteUrl={siteConfig.siteUrl} />
@@ -107,42 +136,26 @@ export default async function IngredientPage({ params }: Props) {
         </nav>
 
         {/* Ingredient Content */}
-        <section className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)] grid grid-cols-1 md:grid-cols-2 gap-[var(--spacing-2xl)] md:gap-[var(--spacing-xl)]">
-          {/* Image */}
-          <div>
-            {ingredient.image?.src && (
-              <div className="relative w-full aspect-square overflow-hidden rounded-[var(--radius)] bg-[hsl(var(--muted-background))]">
-                <Image
-                  src={ingredient.image.src}
-                  alt={ingredient.image.alt || ingredient.name}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1240px) 50vw, 620px"
-                  className="object-cover"
-                />
+        <section className="py-[var(--spacing-2xl)] md:py-[var(--section-spacing)]">
+          {hasImage ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--spacing-2xl)] md:gap-[var(--spacing-xl)]">
+              <div>
+                <div className="relative w-full aspect-square overflow-hidden rounded-[var(--radius)] bg-[hsl(var(--muted-background))]">
+                  <Image
+                    src={ingredient.image!.src}
+                    alt={ingredient.image!.alt || ingredient.name}
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1240px) 50vw, 620px"
+                    className="object-cover"
+                  />
+                </div>
               </div>
-            )}
-          </div>
-
-          {/* Details */}
-          <div className="flex flex-col justify-start">
-            {/* Name */}
-            <h1 className="mb-[var(--spacing-md)]">{ingredient.name}</h1>
-
-            {/* Short Description */}
-            <p className="text-lg text-[hsl(var(--muted-foreground))] mb-[var(--spacing-lg)]">
-              {ingredient.shortDescription}
-            </p>
-
-            {/* Full Description */}
-            {ingredient.description && (
-              <div className="mb-[var(--spacing-lg)]">
-                <p className="text-[hsl(var(--muted-foreground))] leading-relaxed">
-                  {ingredient.description}
-                </p>
-              </div>
-            )}
-          </div>
+              {details}
+            </div>
+          ) : (
+            details
+          )}
         </section>
 
         {/* Related Products Section */}
