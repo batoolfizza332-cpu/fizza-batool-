@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Header, Footer } from '@/components/layout';
+import { JsonLd } from '@/components/seo';
 import { siteConfig } from '@/lib/site-config';
 import './globals.css';
 
@@ -29,10 +30,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+    description: siteConfig.siteDescription,
+  };
+
   return (
     <html lang={siteConfig.locale}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
       </head>
       <body>
         <Header />
