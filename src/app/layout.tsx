@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/layout';
+import { Header, Footer } from '@/components/layout';
 import { siteConfig } from '@/lib/site-config';
 import './globals.css';
 
@@ -37,6 +37,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
