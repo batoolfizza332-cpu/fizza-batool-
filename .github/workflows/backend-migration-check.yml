@@ -1,0 +1,50 @@
+name: Backend Migration Check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: Generate Drizzle migration
+        env:
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+        run: npm run db:generate
+
+      - name: Show generated migration files
+        run: find drizzle -maxdepth 3 -type f -print
+
+      - name: Upload generated migration
+        uses: actions/upload-artifact@v4
+        with:
+          name: harvo-initial-drizzle-migration
+          path: drizzle/
+          if-no-files-found: error
+          retention-days: 7
