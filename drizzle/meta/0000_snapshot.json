@@ -1,0 +1,149 @@
+{
+  "id": "2c0b7958-1d08-41af-94e5-401edfb7692b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.articles": {
+      "name": "articles",
+      "schema": "",
+      "columns": {
+        "id": {"name":"id","type":"uuid","primaryKey":true,"notNull":true,"default":"gen_random_uuid()"},
+        "slug": {"name":"slug","type":"text","primaryKey":false,"notNull":true},
+        "title": {"name":"title","type":"text","primaryKey":false,"notNull":true},
+        "excerpt": {"name":"excerpt","type":"text","primaryKey":false,"notNull":true},
+        "content": {"name":"content","type":"text","primaryKey":false,"notNull":true},
+        "category": {"name":"category","type":"text","primaryKey":false,"notNull":false},
+        "featured_image_src": {"name":"featured_image_src","type":"text","primaryKey":false,"notNull":false},
+        "featured_image_alt": {"name":"featured_image_alt","type":"text","primaryKey":false,"notNull":false},
+        "published_at": {"name":"published_at","type":"timestamp with time zone","primaryKey":false,"notNull":true},
+        "featured": {"name":"featured","type":"boolean","primaryKey":false,"notNull":true,"default":false},
+        "seo_title": {"name":"seo_title","type":"text","primaryKey":false,"notNull":false},
+        "seo_description": {"name":"seo_description","type":"text","primaryKey":false,"notNull":false},
+        "created_at": {"name":"created_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"},
+        "updated_at": {"name":"updated_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"}
+      },
+      "indexes": {
+        "articles_slug_idx": {"name":"articles_slug_idx","columns":[{"expression":"slug","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":true,"concurrently":false,"method":"btree","with":{}},
+        "articles_featured_idx": {"name":"articles_featured_idx","columns":[{"expression":"featured","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}},
+        "articles_published_at_idx": {"name":"articles_published_at_idx","columns":[{"expression":"published_at","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}}
+      },
+      "foreignKeys": {},"compositePrimaryKeys": {},"uniqueConstraints": {},"policies": {},"checkConstraints": {},"isRLSEnabled": false
+    },
+    "public.categories": {
+      "name":"categories","schema":"",
+      "columns": {
+        "id":{"name":"id","type":"uuid","primaryKey":true,"notNull":true,"default":"gen_random_uuid()"},
+        "slug":{"name":"slug","type":"text","primaryKey":false,"notNull":true},
+        "name":{"name":"name","type":"text","primaryKey":false,"notNull":true},
+        "short_description":{"name":"short_description","type":"text","primaryKey":false,"notNull":true},
+        "description":{"name":"description","type":"text","primaryKey":false,"notNull":false},
+        "image_src":{"name":"image_src","type":"text","primaryKey":false,"notNull":false},
+        "image_alt":{"name":"image_alt","type":"text","primaryKey":false,"notNull":false},
+        "featured":{"name":"featured","type":"boolean","primaryKey":false,"notNull":true,"default":false},
+        "seo_title":{"name":"seo_title","type":"text","primaryKey":false,"notNull":false},
+        "seo_description":{"name":"seo_description","type":"text","primaryKey":false,"notNull":false},
+        "created_at":{"name":"created_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"},
+        "updated_at":{"name":"updated_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"}
+      },
+      "indexes": {
+        "categories_slug_idx":{"name":"categories_slug_idx","columns":[{"expression":"slug","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":true,"concurrently":false,"method":"btree","with":{}},
+        "categories_featured_idx":{"name":"categories_featured_idx","columns":[{"expression":"featured","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}}
+      },
+      "foreignKeys":{},"compositePrimaryKeys":{},"uniqueConstraints":{},"policies":{},"checkConstraints":{},"isRLSEnabled":false
+    },
+    "public.ingredients": {
+      "name":"ingredients","schema":"",
+      "columns": {
+        "id":{"name":"id","type":"uuid","primaryKey":true,"notNull":true,"default":"gen_random_uuid()"},
+        "slug":{"name":"slug","type":"text","primaryKey":false,"notNull":true},
+        "name":{"name":"name","type":"text","primaryKey":false,"notNull":true},
+        "short_description":{"name":"short_description","type":"text","primaryKey":false,"notNull":true},
+        "description":{"name":"description","type":"text","primaryKey":false,"notNull":false},
+        "image_src":{"name":"image_src","type":"text","primaryKey":false,"notNull":false},
+        "image_alt":{"name":"image_alt","type":"text","primaryKey":false,"notNull":false},
+        "featured":{"name":"featured","type":"boolean","primaryKey":false,"notNull":true,"default":false},
+        "seo_title":{"name":"seo_title","type":"text","primaryKey":false,"notNull":false},
+        "seo_description":{"name":"seo_description","type":"text","primaryKey":false,"notNull":false},
+        "created_at":{"name":"created_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"},
+        "updated_at":{"name":"updated_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"}
+      },
+      "indexes": {
+        "ingredients_slug_idx":{"name":"ingredients_slug_idx","columns":[{"expression":"slug","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":true,"concurrently":false,"method":"btree","with":{}},
+        "ingredients_featured_idx":{"name":"ingredients_featured_idx","columns":[{"expression":"featured","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}}
+      },
+      "foreignKeys":{},"compositePrimaryKeys":{},"uniqueConstraints":{},"policies":{},"checkConstraints":{},"isRLSEnabled":false
+    },
+    "public.product_ingredients": {
+      "name":"product_ingredients","schema":"",
+      "columns": {
+        "product_id":{"name":"product_id","type":"uuid","primaryKey":false,"notNull":true},
+        "ingredient_id":{"name":"ingredient_id","type":"uuid","primaryKey":false,"notNull":true},
+        "created_at":{"name":"created_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"}
+      },
+      "indexes":{"product_ingredients_ingredient_id_idx":{"name":"product_ingredients_ingredient_id_idx","columns":[{"expression":"ingredient_id","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}}},
+      "foreignKeys": {
+        "product_ingredients_product_id_products_id_fk":{"name":"product_ingredients_product_id_products_id_fk","tableFrom":"product_ingredients","tableTo":"products","columnsFrom":["product_id"],"columnsTo":["id"],"onDelete":"cascade","onUpdate":"no action"},
+        "product_ingredients_ingredient_id_ingredients_id_fk":{"name":"product_ingredients_ingredient_id_ingredients_id_fk","tableFrom":"product_ingredients","tableTo":"ingredients","columnsFrom":["ingredient_id"],"columnsTo":["id"],"onDelete":"cascade","onUpdate":"no action"}
+      },
+      "compositePrimaryKeys":{"product_ingredients_product_id_ingredient_id_pk":{"name":"product_ingredients_product_id_ingredient_id_pk","columns":["product_id","ingredient_id"]}},
+      "uniqueConstraints":{},"policies":{},"checkConstraints":{},"isRLSEnabled":false
+    },
+    "public.product_related_products": {
+      "name":"product_related_products","schema":"",
+      "columns": {
+        "product_id":{"name":"product_id","type":"uuid","primaryKey":false,"notNull":true},
+        "related_product_id":{"name":"related_product_id","type":"uuid","primaryKey":false,"notNull":true},
+        "created_at":{"name":"created_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"}
+      },
+      "indexes":{"product_related_products_related_product_id_idx":{"name":"product_related_products_related_product_id_idx","columns":[{"expression":"related_product_id","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}}},
+      "foreignKeys": {
+        "product_related_products_product_id_products_id_fk":{"name":"product_related_products_product_id_products_id_fk","tableFrom":"product_related_products","tableTo":"products","columnsFrom":["product_id"],"columnsTo":["id"],"onDelete":"cascade","onUpdate":"no action"},
+        "product_related_products_related_product_id_products_id_fk":{"name":"product_related_products_related_product_id_products_id_fk","tableFrom":"product_related_products","tableTo":"products","columnsFrom":["related_product_id"],"columnsTo":["id"],"onDelete":"cascade","onUpdate":"no action"}
+      },
+      "compositePrimaryKeys":{"product_related_products_product_id_related_product_id_pk":{"name":"product_related_products_product_id_related_product_id_pk","columns":["product_id","related_product_id"]}},
+      "uniqueConstraints":{},"policies":{},"checkConstraints":{},"isRLSEnabled":false
+    },
+    "public.products": {
+      "name":"products","schema":"",
+      "columns": {
+        "id":{"name":"id","type":"uuid","primaryKey":true,"notNull":true,"default":"gen_random_uuid()"},
+        "slug":{"name":"slug","type":"text","primaryKey":false,"notNull":true},
+        "name":{"name":"name","type":"text","primaryKey":false,"notNull":true},
+        "category_id":{"name":"category_id","type":"uuid","primaryKey":false,"notNull":true},
+        "short_description":{"name":"short_description","type":"text","primaryKey":false,"notNull":true},
+        "description":{"name":"description","type":"text","primaryKey":false,"notNull":true},
+        "featured_image_src":{"name":"featured_image_src","type":"text","primaryKey":false,"notNull":true},
+        "featured_image_alt":{"name":"featured_image_alt","type":"text","primaryKey":false,"notNull":true},
+        "gallery":{"name":"gallery","type":"jsonb","primaryKey":false,"notNull":false},
+        "size":{"name":"size","type":"text","primaryKey":false,"notNull":false},
+        "benefits":{"name":"benefits","type":"text[]","primaryKey":false,"notNull":false},
+        "ingredients_text":{"name":"ingredients_text","type":"text[]","primaryKey":false,"notNull":false},
+        "usage":{"name":"usage","type":"text","primaryKey":false,"notNull":false},
+        "featured":{"name":"featured","type":"boolean","primaryKey":false,"notNull":true,"default":false},
+        "badge":{"name":"badge","type":"text","primaryKey":false,"notNull":false},
+        "sku":{"name":"sku","type":"text","primaryKey":false,"notNull":false},
+        "seo_title":{"name":"seo_title","type":"text","primaryKey":false,"notNull":false},
+        "seo_description":{"name":"seo_description","type":"text","primaryKey":false,"notNull":false},
+        "keywords":{"name":"keywords","type":"text[]","primaryKey":false,"notNull":false},
+        "created_at":{"name":"created_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"},
+        "updated_at":{"name":"updated_at","type":"timestamp with time zone","primaryKey":false,"notNull":true,"default":"now()"}
+      },
+      "indexes": {
+        "products_slug_idx":{"name":"products_slug_idx","columns":[{"expression":"slug","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":true,"concurrently":false,"method":"btree","with":{}},
+        "products_sku_idx":{"name":"products_sku_idx","columns":[{"expression":"sku","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":true,"concurrently":false,"method":"btree","with":{}},
+        "products_category_id_idx":{"name":"products_category_id_idx","columns":[{"expression":"category_id","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}},
+        "products_featured_idx":{"name":"products_featured_idx","columns":[{"expression":"featured","isExpression":false,"asc":true,"nulls":"last"}],"isUnique":false,"concurrently":false,"method":"btree","with":{}}
+      },
+      "foreignKeys":{"products_category_id_categories_id_fk":{"name":"products_category_id_categories_id_fk","tableFrom":"products","tableTo":"categories","columnsFrom":["category_id"],"columnsTo":["id"],"onDelete":"restrict","onUpdate":"no action"}},
+      "compositePrimaryKeys":{},"uniqueConstraints":{},"policies":{},"checkConstraints":{},"isRLSEnabled":false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {"columns": {},"schemas": {},"tables": {}}
+}
